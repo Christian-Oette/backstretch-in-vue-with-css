@@ -1,4 +1,4 @@
-# backstretch
+# Vue backstretch effect
 
 A backstretch (fullscreen background image effect) without jquery and in combination with vue js.
 
