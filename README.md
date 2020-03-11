@@ -1,2 +1,19 @@
-# backstretch-in-vue-with-css
-Simple backstretch example with vueJs. An alternative to the jquery plugin.
+# backstretch
+
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
