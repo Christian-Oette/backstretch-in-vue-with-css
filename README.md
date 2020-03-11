@@ -1,5 +1,7 @@
 # backstretch
 
+Example is supposed to show up here https://christian-oette.github.io/backstretch-in-vue-with-css/.
+
 ## Project setup
 ```
 yarn install
@@ -7,13 +9,10 @@ yarn install
 
 ### Compiles and hot-reloads for development
 ```
-yarn serve
+yarn dev
 ```
 
 ### Compiles and minifies for production
 ```
 yarn build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
