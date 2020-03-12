@@ -1,15 +1,23 @@
 <template>
   <div>
-    <div
-      class="preview"
-      v-show="lockToWindow"
-      :style="{'width': windowWidth, height: (windowHeight * 0.8) + 'px', backgroundImage: `url('${chosenExample.image}')`, 'background-position-y': chosenExample.y + '%', 'background-position-x': chosenExample.x + '%'}"
-    ></div>
-    <div
-      v-show="!lockToWindow"
-      class="container preview"
-      :style="{'width': previewWidth + 'px', height: previewHeight + 'px', backgroundImage: `url('${chosenExample.image}')`, 'background-position-y': chosenExample.y + '%', 'background-position-x': chosenExample.x + '%'}"
-    ></div>
+    <backstretchHeader 
+      v-if="lockToWindow"
+      :resizeToWindowView="true"
+      :image="chosenExample.image"
+      :focusYinPercent="chosenExample.y"
+      :focusXinPercent="chosenExample.x"
+      :heightPercentageOfWindow="80"
+      :widthPercentageOfWindow="100"
+    />
+    <backstretchHeader
+      v-else
+      :resizeToWindowView="false"
+      :image="chosenExample.image"
+      :width="previewWidth"
+      :height="previewHeight"
+      :focusYinPercent="chosenExample.y"
+      :focusXinPercent="chosenExample.x"      
+    />
 
     <div class="container">
       <p class="imageText">{{chosenExample.text}}</p>
@@ -59,6 +67,7 @@
 </template>
 
 <script>
+import backstretchHeader from "./backstretch-header.vue";
 import WallStreet from "../assets/wallstreet.jpeg";
 import Coffee from "../assets/coffee.jpeg";
 
@@ -68,8 +77,6 @@ export default {
       lockToWindow: true,
       previewWidth: 1280,
       previewHeight: 768,
-      windowHeight: 0,
-      windowWidth: 0,
       chosenExample: null,
       exampleOne: {
         x: 20,
@@ -89,24 +96,18 @@ export default {
   methods: {
     selectExample(example) {
       this.chosenExample = example;
-    },
-    handleResize() {
-      this.windowHeight = window.outerHeight;
-      this.windowWidth = window.outerWidth;
     }
   },
   created() {
     this.selectExample(this.exampleOne);
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
   },
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
+  components: {
+    backstretchHeader    
   }
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   margin: 0 auto;
   width: 1280px;
@@ -114,10 +115,5 @@ export default {
 
 body {
   margin: 0px;
-}
-
-.preview {
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 </style>
