@@ -7,46 +7,60 @@
 <script>
 export default {
     props: {
-        resizeToWindowView: true,
-        heightPercentageOfWindow: Number,        
-        widthPercentageOfWindow: Number,
-        width : undefined,
-        height : undefined,        
-        image: undefined,
-        focusXinPercent: Number,
-        focusYinPercent: Number    
+        resizeToWindowView : {
+            type: Boolean,
+            default: true
+        },
+        heightPercentageOfWindow : {
+            type: Number,
+            default: 100
+        },
+        widthPercentageOfWindow : {
+            type: Number,
+            default: 100
+        },
+        width : {
+            type: Number,
+            default: undefined
+        },
+        height : {
+            type: Number,
+            default: undefined
+        },
+        image : {
+            type: String,
+            required: true
+        },
+        focusXinPercent : {
+            type: Number,
+            default: 100
+        },
+        focusYinPercent : {
+            type: Number,
+            default: 100
+        }
     },    
     watch: {
-        width: function(val) {
-            this.configuredWidth = val;       
-            this.computeStyle();                    
-        },
-        height: function(val) {
-            this.configuredHeight = val;         
+        width: function() {
             this.computeStyle();
         },
-        image: function(val) {
-            this.configuredImage = val;         
+        height: function() {
+            this.computeStyle();
+        },
+        image: function() {       
             this.computeStyle();
         },
         focusXinPercent: function(val) {
-             this.xOffset = val;  
              this.computeStyle();   
         },
         focusYinPercent: function(val) {
-             this.yOffset = val;  
              this.computeStyle();   
         }
 
     },
     data() {
         return {
-            divstyle: {},
-            configuredWidth: undefined,
-            configuredHeight: undefined,
-            configuredImage: undefined,
-            xOffset: undefined,
-            yOffset: undefined
+            divstyle: {}
         }
     },
     methods: {       
@@ -62,12 +76,12 @@ export default {
         computeStyle() {            
            let style = {};
            console.log(this.yOffset);
-           const backgroundImage = this.configuredImage ? `url('${this.configuredImage}')` : 'none'                
+           const backgroundImage = this.image ? `url('${this.image}')` : 'none'                
            const defaultStyle = {
                 'background-repeat': 'no-repeat',
                 'background-size': 'cover',            
-                'background-position-y': this.yOffset ? this.inPercent(this.yOffset) : this.inPercent(0), 
-                'background-position-x': this.xOffset ? this.inPercent(this.xOffset) : this.inPercent(0),
+                'background-position-y': this.focusYinPercent ? this.inPercent(this.focusYinPercent) : this.inPercent(0), 
+                'background-position-x': this.focusXinPercent ? this.inPercent(this.focusXinPercent) : this.inPercent(0),
                 backgroundImage,
             }
 
@@ -83,17 +97,12 @@ export default {
             }
             else 
             {                                
-                style = {width: this.inPixels(this.configuredWidth), height: this.inPixels(this.configuredHeight), ...defaultStyle}                
+                style = {width: this.inPixels(this.width), height: this.inPixels(this.height), ...defaultStyle}                
             }                                  
             this.divstyle = style;         
         }
     },
     created() {          
-        this.configuredWidth = this.width;                  
-        this.configuredHeight = this.height;
-        this.configuredImage = this.image;
-        this.yOffset = this.focusYinPercent;
-        this.xOffset = this.focusXinPercent;
         window.addEventListener("resize", this.handleResize);        
         this.handleResize();                
     },

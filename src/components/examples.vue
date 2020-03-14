@@ -35,7 +35,7 @@
             type="range"
             min="100"
             max="1280"
-            v-model="previewWidth"
+            v-model.number="previewWidth"
             class="slider"
             id="myRange"
           />
@@ -44,7 +44,7 @@
             type="range"
             min="100"
             max="768"
-            v-model="previewHeight"
+            v-model.number="previewHeight"
             class="slider"
             id="myRange"
           />
