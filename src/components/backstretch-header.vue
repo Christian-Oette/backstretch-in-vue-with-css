@@ -1,6 +1,5 @@
 <template>
   <div :style="{...computedStyle, 'background-repeat': 'no-repeat', 'background-size': 'cover'}" :class="'bsdefault'">
-      {{renderKey}}
     <slot />
   </div>
 </template>
