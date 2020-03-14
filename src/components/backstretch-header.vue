@@ -1,5 +1,6 @@
 <template>
-  <div :style="divstyle">
+  <div :style="{...computedStyle, 'background-repeat': 'no-repeat', 'background-size': 'cover'}" :class="'bsdefault'">
+      {{renderKey}}
     <slot />
   </div>
 </template>
@@ -60,7 +61,7 @@ export default {
     },
     data() {
         return {
-            divstyle: {}
+            computedStyle: {}
         }
     },
     methods: {       
@@ -74,12 +75,8 @@ export default {
             this.computeStyle();
         },
         computeStyle() {            
-           let style = {};
-           console.log(this.yOffset);
            const backgroundImage = this.image ? `url('${this.image}')` : 'none'                
-           const defaultStyle = {
-                'background-repeat': 'no-repeat',
-                'background-size': 'cover',            
+           const defaultStyle = {            
                 'background-position-y': this.focusYinPercent ? this.inPercent(this.focusYinPercent) : this.inPercent(0), 
                 'background-position-x': this.focusXinPercent ? this.inPercent(this.focusXinPercent) : this.inPercent(0),
                 backgroundImage,
@@ -89,7 +86,7 @@ export default {
                 const computedHeight = this.heightPercentageOfWindow === 100 ? window.outerHeight : window.outerHeight * (this.heightPercentageOfWindow / 100);                                
                 const computedWidth = this.widthPercentageOfWindow === 100 ? window.outerWidth: window.outerWidth * (this.widthPercentageOfWindow / 100);   
 
-                style = {
+                this.computedStyle = {
                     width: this.inPixels(computedWidth), 
                     height: this.inPixels(computedHeight),                                         
                     ...defaultStyle
@@ -97,9 +94,8 @@ export default {
             }
             else 
             {                                
-                style = {width: this.inPixels(this.width), height: this.inPixels(this.height), ...defaultStyle}                
-            }                                  
-            this.divstyle = style;         
+                this.computedStyle = {width: this.inPixels(this.width), height: this.inPixels(this.height), ...defaultStyle}                
+            }                                       
         }
     },
     created() {          
@@ -111,3 +107,4 @@ export default {
     },
 }
 </script>
+<style scoped>
