@@ -21,6 +21,7 @@
 
     <div class="container">
       <p class="imageText">{{chosenExample.text}}</p>
+      <p><a href="https://github.com/Christian-Oette/backstretch-in-vue-with-css">Code on Github</a></p>
       <button @click="lockToWindow = !lockToWindow">TOGGLE AUTO SCALE ON RESIZE</button>
 
       <H2>Choose picture</H2>
@@ -83,13 +84,13 @@ export default {
         y: 31,
         image: WallStreet,
         text:
-          "In this example, you should always the wallstreet sign in any scale."
+          "In this example, you should always see the wallstreet sign in any scale. Try to resize the window!"
       },
       exampleTwo: {
         x: 60,
         y: 90,
         image: Coffee,
-        text: "In this example, you should always the coffee cup in any scale."
+        text: "In this example, you should always see the coffee cup in any scale. Try to resize the window!"
       }
     };
   },

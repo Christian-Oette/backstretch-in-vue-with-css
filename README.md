@@ -2,7 +2,7 @@
 
 A backstretch (fullscreen background image effect) without jquery and in combination with vue js.
 
-Example is supposed to show up here https://christian-oette.github.io/backstretch-in-vue-with-css/.
+Running example is shown here https://christian-oette.github.io/backstretch-in-vue-with-css/.
 
 The idea of the project is to focus on one element or section within a picture.
 And whenever the size changes for different displays the element is still visible and the rest is cropped.
